@@ -1,6 +1,7 @@
 
 import { KnowledgeNode } from '../types/knowledge';
 import { holyScrollsData } from '../data/holyScrolls';
+import { holisticKnowledge } from './holisticKnowledge';
 
 // Simple tarot and runes data for the knowledge graph
 const simpleTarotData = [
@@ -24,11 +25,13 @@ class KnowledgeGraph {
   }
 
   private initializeGraph() {
-    // Load all knowledge data
+    // Load all knowledge data including new holistic knowledge
+    const holisticNodes = holisticKnowledge.getAllHolisticNodes();
     const allNodes = [
       ...holyScrollsData,
       ...this.convertTarotToNodes(),
-      ...this.convertRunesToNodes()
+      ...this.convertRunesToNodes(),
+      ...holisticNodes
     ];
 
     allNodes.forEach(node => {
@@ -36,7 +39,7 @@ class KnowledgeGraph {
       this.connections.set(node.id, new Set(node.connections));
     });
 
-    console.log(`Knowledge graph initialized with ${this.nodes.size} nodes`);
+    console.log(`Enhanced knowledge graph initialized with ${this.nodes.size} nodes`);
   }
 
   private convertTarotToNodes(): KnowledgeNode[] {

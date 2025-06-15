@@ -13,10 +13,10 @@ class McpServer {
   async connect(): Promise<boolean> {
     try {
       // Simulate MCP server connection
-      console.log('Connecting to MCP server...');
+      console.log('Connecting to Enhanced MCP server...');
       await new Promise(resolve => setTimeout(resolve, 1000));
       this.isConnected = true;
-      console.log('Connected to MCP server successfully');
+      console.log('Connected to Enhanced MCP server successfully');
       return true;
     } catch (error) {
       console.error('Failed to connect to MCP server:', error);
@@ -32,18 +32,23 @@ class McpServer {
     const lastMessage = messages[messages.length - 1];
     const contextText = context.map(node => `${node.title}: ${node.content}`).join('\n\n');
     
-    // Simulate AI response generation based on context
-    const response = await this.simulateAIResponse(lastMessage.content, contextText);
+    // Enhanced AI response generation with new knowledge domains
+    const response = await this.simulateEnhancedAIResponse(lastMessage.content, contextText);
     return response;
   }
 
-  private async simulateAIResponse(query: string, context: string): Promise<string> {
-    // This would normally call an actual AI service
-    // For now, we'll create contextual responses based on the knowledge graph
-    
+  private async simulateEnhancedAIResponse(query: string, context: string): Promise<string> {
     const lowerQuery = query.toLowerCase();
     
-    if (lowerQuery.includes('tarot') || lowerQuery.includes('card')) {
+    if (lowerQuery.includes('frequency') || lowerQuery.includes('sound') || lowerQuery.includes('hz')) {
+      return this.generateFrequencyResponse(query, context);
+    } else if (lowerQuery.includes('gematria') || lowerQuery.includes('numerology') || lowerQuery.includes('number')) {
+      return this.generateNumerologyResponse(query, context);
+    } else if (lowerQuery.includes('color') || lowerQuery.includes('light') || lowerQuery.includes('spectrum')) {
+      return this.generateColorResponse(query, context);
+    } else if (lowerQuery.includes('etymology') || lowerQuery.includes('word') || lowerQuery.includes('meaning')) {
+      return this.generateEtymologyResponse(query, context);
+    } else if (lowerQuery.includes('tarot') || lowerQuery.includes('card')) {
       return this.generateTarotResponse(query, context);
     } else if (lowerQuery.includes('rune') || lowerQuery.includes('norse')) {
       return this.generateRuneResponse(query, context);
@@ -54,6 +59,66 @@ class McpServer {
     } else {
       return this.generateGeneralResponse(query, context);
     }
+  }
+
+  private generateFrequencyResponse(query: string, context: string): string {
+    return `🎵 **Sacred Sound & Frequency Wisdom**
+
+The universe itself vibrates at specific frequencies, and your inquiry touches upon the profound science of sound healing. Each frequency carries unique properties that can influence matter, consciousness, and spiritual states.
+
+${context ? `**From the Frequency Archives:**\n${context.substring(0, 600)}...` : ''}
+
+Sound frequencies work through the principle of resonance - when we expose ourselves to specific frequencies, our cellular and energetic bodies can attune to these vibrations. The ancient mystery schools understood this, using chants, mantras, and sacred instruments to alter consciousness.
+
+Modern science confirms what the ancients knew: frequencies like 528 Hz can actually repair DNA, while 432 Hz resonates with the natural frequency of Earth itself. These discoveries bridge the gap between ancient wisdom and quantum physics.
+
+Would you like to explore specific healing frequencies, or shall we delve into the mathematical relationships between sound, light, and consciousness?`;
+  }
+
+  private generateNumerologyResponse(query: string, context: string): string {
+    return `🔢 **Sacred Numbers & Divine Mathematics**
+
+Numbers are the language of the universe, and gematria reveals the hidden connections between words, concepts, and cosmic forces. Your question touches upon the profound wisdom of sacred numerology.
+
+${context ? `**From the Numerical Codex:**\n${context.substring(0, 600)}...` : ''}
+
+The Hebrew gematria system reveals that the divine name YHVH equals 26, connecting to the 26 dimensions of bosonic string theory. Similarly, English gematria shows that LOVE = 54 and LIGHT = 56, revealing their harmonic relationship.
+
+Master numbers like 11, 22, and 33 represent gateways to higher consciousness, while single digits 1-9 embody the archetypal energies that manifest reality. Pythagoras taught that number is the essence of all things.
+
+Would you like me to calculate the gematria value of specific words, or explore the deeper numerological patterns in your name and birth date?`;
+  }
+
+  private generateColorResponse(query: string, context: string): string {
+    return `🌈 **The Divine Spectrum of Light & Color**
+
+Color is light vibrating at specific frequencies, and each hue carries profound healing and spiritual properties. Your inquiry touches upon the sacred science of chromotherapy and light consciousness.
+
+${context ? `**From the Spectrum Codex:**\n${context.substring(0, 600)}...` : ''}
+
+Red light at 460 THz activates the root chakra and life force, while violet at 750 THz opens the crown to divine consciousness. Each color frequency corresponds to specific psychological, spiritual, and healing effects.
+
+The ancient Egyptians used colored light in their healing temples, and modern science confirms that light therapy can influence neurotransmitters, hormones, and cellular regeneration. Color is truly medicine for body and soul.
+
+The chakra system maps perfectly to the visible light spectrum, showing how consciousness and light are intimately connected. Even our emotions have color frequencies!
+
+Would you like to explore specific color healing techniques, or discover the spiritual significance of colors that appear in your life?`;
+  }
+
+  private generateEtymologyResponse(query: string, context: string): string {
+    return `📜 **Sacred Etymology & Word Origins**
+
+Words carry the memory of human consciousness, and etymology reveals the spiritual journey of concepts through time. Your question touches upon the profound wisdom hidden in language itself.
+
+${context ? `**From the Linguistic Scrolls:**\n${context.substring(0, 600)}...` : ''}
+
+The word "consciousness" comes from Latin "con-scire" meaning "to know with" - revealing that awareness is inherently connected and shared. "Sacred" derives from "sacer" meaning "set apart" - showing how the holy is distinguished from the mundane.
+
+Ancient languages like Sanskrit, Hebrew, and Greek were considered sacred because they were believed to vibrate at frequencies that could affect reality. The Hebrew letters themselves are considered living energies.
+
+Modern discoveries in quantum linguistics suggest that words and thoughts may indeed have measurable effects on physical reality, validating ancient beliefs about the power of sacred speech.
+
+Would you like to explore the etymology of specific words that hold meaning for you, or delve into the spiritual significance of ancient sacred languages?`;
   }
 
   private generateTarotResponse(query: string, context: string): string {
@@ -118,7 +183,7 @@ What specific aspect of this ancient knowledge calls to your soul? I can guide y
 
   disconnect(): void {
     this.isConnected = false;
-    console.log('Disconnected from MCP server');
+    console.log('Disconnected from Enhanced MCP server');
   }
 
   isServerConnected(): boolean {
@@ -128,5 +193,5 @@ What specific aspect of this ancient knowledge calls to your soul? I can guide y
 
 export const mcpServer = new McpServer({
   endpoint: 'wss://localhost:8080/mcp',
-  model: 'mystical-knowledge-v1'
+  model: 'holistic-knowledge-v2'
 });
