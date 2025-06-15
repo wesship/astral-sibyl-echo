@@ -1,8 +1,19 @@
 
 import { KnowledgeNode } from '../types/knowledge';
 import { holyScrollsData } from '../data/holyScrolls';
-import { tarotData } from '../data/tarot';
-import { runesData } from '../data/runes';
+
+// Simple tarot and runes data for the knowledge graph
+const simpleTarotData = [
+  { id: 'fool', name: 'The Fool', meaning: 'New beginnings, innocence, spontaneity', suit: 'Major Arcana', element: 'Air' },
+  { id: 'magician', name: 'The Magician', meaning: 'Manifestation, resourcefulness, power', suit: 'Major Arcana', element: 'Air' },
+  { id: 'high-priestess', name: 'The High Priestess', meaning: 'Intuition, sacred knowledge, divine feminine', suit: 'Major Arcana', element: 'Water' }
+];
+
+const simpleRunesData = [
+  { name: 'Fehu', meaning: 'Wealth, abundance, success', description: 'Material prosperity and new beginnings', symbolism: 'Cattle, moveable wealth' },
+  { name: 'Uruz', meaning: 'Strength, vitality, determination', description: 'Raw strength and primal energy', symbolism: 'Wild ox, untamed power' },
+  { name: 'Thurisaz', meaning: 'Protection, defense, conflict', description: 'Protective force and defensive action', symbolism: 'Thorn, Thor\'s hammer' }
+];
 
 class KnowledgeGraph {
   private nodes: Map<string, KnowledgeNode> = new Map();
@@ -29,23 +40,23 @@ class KnowledgeGraph {
   }
 
   private convertTarotToNodes(): KnowledgeNode[] {
-    return tarotData.map(card => ({
+    return simpleTarotData.map(card => ({
       id: `tarot-${card.id}`,
       type: 'symbol' as const,
       title: card.name,
-      content: `${card.meaning} - ${card.description}. Reversed: ${card.reversed}`,
+      content: `${card.meaning} - Tarot card from the ${card.suit}.`,
       connections: [`tarot-suit-${card.suit}`, 'tarot-system'],
       metadata: {
         origin: 'Tarot Tradition',
         category: 'Divination',
         tags: ['tarot', card.suit, card.element],
-        significance: card.symbolism
+        significance: `${card.name} represents ${card.meaning}`
       }
     }));
   }
 
   private convertRunesToNodes(): KnowledgeNode[] {
-    return runesData.map(rune => ({
+    return simpleRunesData.map(rune => ({
       id: `rune-${rune.name.toLowerCase()}`,
       type: 'symbol' as const,
       title: rune.name,
