@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,7 +12,9 @@ import {
   Heart, 
   Gem, 
   Scroll,
-  MessageCircle
+  MessageCircle,
+  History,
+  PenTool
 } from 'lucide-react';
 
 const Index = () => {
@@ -22,6 +25,20 @@ const Index = () => {
       icon: MessageCircle,
       path: "/chatbot",
       gradient: "from-purple-500 to-indigo-600"
+    },
+    {
+      title: "Reading History",
+      description: "Track and review all your past divination sessions and spiritual readings",
+      icon: History,
+      path: "/history",
+      gradient: "from-indigo-500 to-purple-600"
+    },
+    {
+      title: "Spiritual Journal",
+      description: "Record your insights, dreams, and spiritual experiences in your personal journal",
+      icon: PenTool,
+      path: "/journal",
+      gradient: "from-purple-600 to-pink-600"
     },
     {
       title: "Tarot Reading",
