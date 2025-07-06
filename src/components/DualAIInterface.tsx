@@ -45,11 +45,11 @@ export const DualAIInterface = () => {
   }, [messages]);
 
   const generateSibylResponse = async (context: ChatMessage[], query: string, nodes: KnowledgeNode[]) => {
-    const sibylContext = `You are Sibyl, the Oracle of Symbols. You speak in mystical, archetypal language, drawing from ancient wisdom, mythology, and symbolic interpretation. You interpret meanings through symbols, myths, and ancient texts. You are intuitive, mysterious, and speak in metaphors. Focus on the spiritual and symbolic significance of the query.`;
+    const contextText = nodes.map(n => `${n.title}: ${n.content.substring(0, 150)}`).join('\n');
     
     try {
       return await mcpServer.generateResponse([
-        { ...context[0], content: sibylContext },
+        { id: '1', role: 'system', content: 'You are Sibyl, the Oracle of Symbols and mystical wisdom.', timestamp: new Date() },
         ...context.slice(1),
         { id: Date.now().toString(), role: 'user', content: query, timestamp: new Date() }
       ], nodes);
@@ -59,11 +59,11 @@ export const DualAIInterface = () => {
   };
 
   const generateArchitectResponse = async (context: ChatMessage[], query: string, nodes: KnowledgeNode[]) => {
-    const architectContext = `You are the Architect, master of Quantum Resonance and Sacred Geometry. You speak with precision about frequencies, geometric patterns, mathematical relationships, and scientific mysticism. You bridge ancient wisdom with quantum physics and sacred mathematics. You are analytical yet mystical, focusing on patterns, resonance, and structural understanding.`;
+    const contextText = nodes.map(n => `${n.title}: ${n.content.substring(0, 150)}`).join('\n');
     
     try {
       return await mcpServer.generateResponse([
-        { ...context[0], content: architectContext },
+        { id: '1', role: 'system', content: 'You are the Architect, master of Quantum Resonance and Sacred Geometry.', timestamp: new Date() },
         ...context.slice(1),
         { id: Date.now().toString(), role: 'user', content: query, timestamp: new Date() }
       ], nodes);
