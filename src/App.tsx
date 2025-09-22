@@ -18,6 +18,7 @@ import Mythology from "./pages/Mythology";
 import ChatBot from "./pages/ChatBot";
 import ReadingHistory from "./pages/ReadingHistory";
 import Journal from "./pages/Journal";
+import PlanetaryChart from "./pages/PlanetaryChart";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/chatbot" element={<ChatBot />} />
             <Route path="/history" element={<ReadingHistory />} />
             <Route path="/journal" element={<Journal />} />
+            <Route path="/planetary-chart" element={<PlanetaryChart />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

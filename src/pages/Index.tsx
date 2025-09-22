@@ -14,7 +14,8 @@ import {
   Scroll,
   MessageCircle,
   History,
-  PenTool
+  PenTool,
+  Star
 } from 'lucide-react';
 
 const Index = () => {
@@ -60,6 +61,13 @@ const Index = () => {
       icon: Moon,
       path: "/horoscope",
       gradient: "from-red-500 to-yellow-500"
+    },
+    {
+      title: "Planetary Chart",
+      description: "Master the 24-layer planetary correspondence system for ritual, meditation, and alchemical work with complete planetary wisdom",
+      icon: Star,
+      path: "/planetary-chart",
+      gradient: "from-yellow-400 to-orange-500"
     },
     {
       title: "Esoteric Blog",
